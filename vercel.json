@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/check_order.py": {
+      "runtime": "python3.9"
+    }
+  }
+}
