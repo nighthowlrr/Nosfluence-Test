@@ -1,0 +1,9 @@
+{
+  "name": "shopify-order-status-api",
+  "version": "1.0.0",
+  "main": "api/check_order.js",
+  "type": "commonjs",
+  "dependencies": {
+    "node-fetch": "^2.6.9"
+  }
+}
