@@ -36,6 +36,7 @@ module.exports = async (req, res) => {
 
     // If multiple orders returned (via email)
     if (email) {
+      // Return all matched orders for this email
       const summaries = data.orders.map(order => ({
         order_id: order.name,
         created_at: order.created_at,
@@ -47,18 +48,18 @@ module.exports = async (req, res) => {
         count: summaries.length,
         orders: summaries
       });
+    } else {
+      // Return one specific order if order_id is used
+      const order = data.orders[0];
+      const status = order.fulfillment_status || "Unfulfilled";
+      const tracking = order.fulfillments?.[0]?.tracking_number || "Not yet shipped";
+
+      return res.status(200).json({
+        order_id: order.name,
+        status,
+        tracking
+      });
     }
-
-    // If order_id was used, return single order
-    const order = data.orders[0];
-    const status = order.fulfillment_status || "Unfulfilled";
-    const tracking = order.fulfillments?.[0]?.tracking_number || "Not yet shipped";
-
-    return res.status(200).json({
-      order_id: order.name,
-      status,
-      tracking
-    });
 
   } catch (err) {
     return res.status(500).json({ error: "Shopify API error", details: err.message });
