@@ -1,7 +1,7 @@
 const fetch = require('node-fetch');
 
 module.exports = async (req, res) => {
-  const { email, order_id, limit = 5 } = req.query;
+  const { email, order_id, limit = 1 } = req.query;
 
   const SHOPIFY_STORE = process.env.SHOPIFY_STORE;
   const SHOPIFY_ACCESS_TOKEN = process.env.SHOPIFY_ACCESS_TOKEN;
